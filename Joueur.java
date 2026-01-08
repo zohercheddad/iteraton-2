@@ -36,8 +36,35 @@ public class Joueur extends Character{
         this.token.setLayoutX(x);
         this.token.setLayoutY(y);
     }
+
+
+
+
+    public void drop(Item i) {
+        i.disable();
+        points += i.getValue();
+    }
+
+
+    public void reciveDamages(int x) {
+        live = Math.max(0, live - x);
+
+        // recul 10 px selon la rotation
+        switch ((int) getRotation()) {
+            case 0:   setY(getY() + 10); break;   // nord
+            case 90:  setX(getX() - 10); break;   // est
+            case 180: setY(getY() - 10); break;   // sud
+            case 270: setX(getX() + 10); break;   // ouest
+        }
+    }
     @Override
     public void onCollideWith(GameObject go) {
-        // comportement du joueur vide pour l’instant
+        if (go instanceof Item) {
+            drop((Item) go);
+        } else if (go instanceof Monster) {
+            reciveDamages(2);
+        } else {
+            repositionAbout(go); // méthode fournie par le prof
+        }
     }
 }

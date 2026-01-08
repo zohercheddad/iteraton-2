@@ -54,6 +54,11 @@ public abstract class GameObject {
         return enable;
     }
 
+    public void disable() {
+        enable = false;
+        token.setVisible(false);
+    }
+
     public void addToPane(Pane pane) {
         pane.getChildren().add(this.token);
     }

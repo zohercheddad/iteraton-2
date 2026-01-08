@@ -73,6 +73,10 @@ public abstract class Character extends GameObject {
             }
         }
     }
+    public void repositionAbout(GameObject go) {
+        setX(getX() - 10);
+        setY(getY() - 10);
+    }
 
     // ===== COMPORTEMENT SPÉCIFIQUE =====
     public abstract void onCollideWith(GameObject go);
